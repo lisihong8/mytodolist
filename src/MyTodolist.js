@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { Input, Button, List } from 'antd';
+import React, { Component } from 'react';
+
 // import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './store/actionTypes';
 import { getInputChangeAction, getAddTodoItemAction, getDeleteTodoItemAction } from './store/actionCreator';
 import store from './store';
-import 'antd/dist/antd.css';
+import TodolistUI from './TodolistUI';
+
 
 // const data = [
 //   'Racing car sprays burning fuel into crowd.',
@@ -20,6 +21,7 @@ class MyTodolist extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleStoreChange = this.handleStoreChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleItemDelete = this.handleItemDelete.bind(this);
     //console.log(store.getState());
     //store.getState() 获取store里的数据
     this.state = store.getState();
@@ -64,28 +66,13 @@ class MyTodolist extends Component {
 
   render() {
     return (
-      <Fragment>
-        <div style={{marginTop:'10px'}}>
-          <Input 
-            placeholder="请输入内容" 
-            style={{width:'300px',margin:'0 10px 10px 10px'}} 
-            value={this.state.inputValue}
-            onChange={this.handleInputChange}
-          />
-          <Button type="primary" onClick={this.handleBtnClick}>提交</Button>
-        </div>
-        <List
-          style={{marginLeft:'10px',width:'300px'}}
-          size="small"
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
-          bordered
-          // dataSource={data}
-          dataSource={this.state.list}
-          renderItem={(item,index) => <List.Item onClick={this.handleItemDelete.bind(this,index)}>{item}</List.Item>}
-        />
-        </Fragment>
-
+      <TodolistUI 
+        inputValue={this.state.inputValue}
+        list={this.state.list}
+        handleInputChange={this.handleInputChange}
+        handleBtnClick={this.handleBtnClick}
+        handleItemDelete={this.handleItemDelete}
+      />
     )
   }
 }
