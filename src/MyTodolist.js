@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 // import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM } from './store/actionTypes';
-import { getInputChangeAction, getAddTodoItemAction, getDeleteTodoItemAction, getTodoList } from './store/actionCreator';
+import { getInputChangeAction, getAddTodoItemAction, getDeleteTodoItemAction, initListAction } from './store/actionCreator';
 import store from './store';
 import TodolistUI from './TodolistUI';
 
@@ -31,20 +31,18 @@ class MyTodolist extends Component {
   }
 
   componentDidMount() {
-    // axios.get('http://localhost:8080/mytodolist')
-    //   .then((res)=>{
-    //     //console.log(res.data);
-    //     //console.log(res.data.data);
-    //     const data = res.data.data;
-    //     const action = initListAction(data);
-    //     //console.log(action);
-    //     store.dispatch(action);
-    //   }).catch(()=>{
-    //     console.log('err');
-    //   })
-    const action = getTodoList();
-    console.log(action);
-    store.dispatch(action);
+
+    axios.get('http://localhost:8080/mytodolist')
+      .then((res)=>{
+        //console.log(res);
+        //console.log(res.data);
+       //console.log(res.data.data);
+        const data = res.data.data;
+        const action = initListAction(data);
+        // console.log(action);
+        store.dispatch(action);
+      })
+    
   }
 
   handleInputChange(e) {
