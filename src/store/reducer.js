@@ -1,8 +1,8 @@
 import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_ACTION } from './actionTypes';
 
 const defaultState = {
-  inputValue: '123',
-  list: ['1','2','3']
+  inputValue: '',
+  list: []
 }
 
 // reducer可以接受state,但是绝不能修改state
